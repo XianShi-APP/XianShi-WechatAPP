@@ -97,7 +97,7 @@ Page({
                viewType:!this.data.viewType
            })
         }
-        else if(this.data.tabs[1].isActive){ //切换交易视图
+        else if(this.data.current==2){ //切换交易视图
             let newImg= this.data.TradeViewImg.reverse()
            this.setData({
             TradeViewImg:newImg,
