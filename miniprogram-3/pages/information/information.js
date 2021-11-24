@@ -109,6 +109,11 @@ Page({
     onLoad: function (options) {
         let that=this
         const userinfo=wx.getStorageSync('userinfo')
+        // let list=wx.getStorageInfoSync('informationlist')
+        // that.setData({
+        //     informationList:list
+        // })
+        // return
         const _ = wx.cloud.database().command
         let where={
             receiver: _.eq(userinfo.openid)
@@ -120,10 +125,10 @@ Page({
                 that.setData({
                     informationList:reverse
                 })
-
+                
                 /*根据信息表中的委托id查找出对应委托标题和相关人
                   注意：委托放弃时接受人为空，此后再次被其他人接受后，此条消息会显示当前新的接受人
-                  这样旧消息也会显示最新的委托信息，是好是坏？
+                  这样旧消息也会显示最新的委托信息
                 */
                 let informationList=that.data.informationList
                 for(let i=0;i<informationList.length;i++){ 
@@ -156,8 +161,10 @@ Page({
                     }
                     
                 }
+                // wx.setStorageSync('informationlist',that.data.informationList)
             }
         })
+        
 
         // wx.cloud.database().collection('information')
         // .where({
@@ -221,7 +228,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        this.onLoad()
     },
 
     /**

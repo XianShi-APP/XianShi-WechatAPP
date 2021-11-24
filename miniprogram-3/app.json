@@ -11,7 +11,8 @@
         "components/tradeItem/tradeItem",
         "pages/information/information",
         "pages/myTrade/myTrade",
-        "components/addTrade/addTrade"
+        "components/addTrade/addTrade",
+        "pages/taskInfo/taskInfo"
     ],
     "window": {
         "backgroundTextStyle": "light",

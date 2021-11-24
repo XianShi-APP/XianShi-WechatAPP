@@ -27,10 +27,10 @@ Page({
         //         isActive:false
         //     }
         // ], //标题栏列表
-        current:0,
+        current:0, //标题栏
         RequestViewImg:['../../icon/view0.png','../../icon/view1.png'], //委托的视图的图标列表
         TradeViewImg:['../../icon/view0.png','../../icon/view2.png'], //交易的视图的图标列表
-        viewType:true, //视图种类 true表示带图，false表示无图
+        viewType:true, //视图种类 true表示长条，false表示并列
         requestList:[], //委托列表
         tradeList:[], //交易列表
         userinfo:{}

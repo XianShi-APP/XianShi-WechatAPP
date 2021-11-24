@@ -432,10 +432,34 @@ Page({
         let res=requestService.dbDocument('request',options.id,'委托详情页获取成功')
         res.then(function(result){
             if(result!=false){
+                if(result.data.state==-1 || result.data=={}){
+                    wx.showToast({
+                      title: '此委托已完成或已被删除',
+                      icon:'none'
+                    })
+                    setTimeout(function(){
+                        wx.navigateBack({
+                            delta: 1,
+                          })
+                    },1000)
+                    return
+                }
                 that.setData({
                     requestItem:result.data
                 })
                 that.getChat()
+            }
+            else{
+                wx.showToast({
+                    title: '此委托已完成或已被删除',
+                    icon:'none'
+                  })
+                  setTimeout(function(){
+                    wx.navigateBack({
+                        delta: 1,
+                      })
+                },1000)
+                  return
             }
         })
 

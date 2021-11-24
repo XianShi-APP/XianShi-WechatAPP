@@ -43,7 +43,8 @@ Page({
         const _ = wx.cloud.database().command
         if(who==0){ //如果操作者是接受人
             let where={
-                receiver: _.eq(options.id)
+                receiver: _.eq(options.id),
+                state:_.neq(-1)
             }
             let res=requestService.dbSearch('request',where,'个人任务页获取成功')
             res.then(function(result){
@@ -76,7 +77,8 @@ Page({
             })
             //修改查询目标到发布者
             let where={
-                publisher: _.eq(options.id)
+                publisher: _.eq(options.id),
+                state:_.neq(-1)
             }
             let res=requestService.dbSearch('request',where,'个人任务页获取成功')
             res.then(function(result){

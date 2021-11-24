@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-card1":"../../dist/card1/index"
+  },
   "navigationBarTitleText": "我的交易",
   "enablePullDownRefresh": true
 }

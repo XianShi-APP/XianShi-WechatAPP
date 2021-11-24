@@ -30,16 +30,17 @@
     <!-- 委托、问答、交易的分类切换 -->
     <!-- TODO（肖梓洪）：参考分类实现切换功能 -->
     <i-tabs current="{{ current }}" bindchange="handleChange">
-      <i-tab key="tab1" title="委托"></i-tab>
-      <i-tab key="tab2" title="问答"></i-tab>
-      <i-tab key="tab3" title="交易"></i-tab>
+      <i-tab key="tab0" title="委托" class="{{current==0? 'active':''}}"></i-tab>
+      <i-tab key="tab1" title="问答" class="{{current==1? 'active':''}}"></i-tab>
+      <i-tab key="tab2" title="交易" class="{{current==2? 'active':''}}"></i-tab>
     </i-tabs>
   </i-col>
   <i-col span="3" i-class="col-class">
     <!-- 切换视图按钮 -->
     <!-- TODO（肖梓洪）：参考分类实现切换视图功能 -->
     <!-- <image mode="heightFix" class="top_img" bindtap="handleView" src="{{RequestViewImg[0]}}" style="width: 85rpx; height: 90rpx; display: inline-block; box-sizing: border-box"></image> -->
-    <van-icon bindtap="handleView" style="display: flex; justify-content: center; align-items: center; margin:10rpx;" name="apps-o" size="35" color="#80848f " />
+    <van-icon bindtap="handleView" style="display: flex; justify-content: center; align-items: center; margin:10rpx;"
+      name="apps-o" size="35" color="#80848f " />
   </i-col>
 </i-row>
 
@@ -48,9 +49,68 @@
 <!-- 推荐列表 -->
 <!-- TODO（肖梓洪）：参考分类实现委托列表自动生成功能和跳转功能 -->
 <!-- TODO（肖梓洪） thumb：图片内容先用网络图片占位，待传参数后实现 -->
+
+<!-- 第一个tab页内容 -->
+<block wx:if="{{current == 0}}" wx:for="{{requestList}}">
+    <navigator wx:if="{{viewType}}" url="../../components/requestItem/requestItem?id={{item._id}}">
+        <!-- 下面是列表 -->
+         <!-- wx:if="{{item.state==1 && item.publisher!=userinfo.openid}}"> 过滤自己发的委托 -->
+        <i-card1 bindtap="handleJump" wx:if="{{item.state==1}}" title="{{item.title}}" extra="{{item.body}}"
+            thumb="{{item.img.length==0? '../../icon/noPictures.png': item.img[0]}}" price="{{item.price}}"
+            other="华南理工大学 C10 606 ">
+        </i-card1>
+    </navigator>
+    <navigator wx:if="{{!viewType}}" url="../../components/requestItem/requestItem?id={{item._id}}">
+        <block wx:if="{{index%2==0}}">
+            <i-card2 bindtap="handleJump" wx:if="{{item.state==1}}" title="{{item.title}}" extra="{{item.body}}"
+                thumb="{{item.img.length==0? '../../icon/noPictures.png': item.img[0]}}" price="{{item.price}}"
+                other="华南理工大学 C10 606 ">
+            </i-card2>
+            <i-card2 bindtap="handleJump" wx:if="{{requestList[index+1].state==1}}"
+                title="{{requestList[index+1].title}}" extra="{{item.body}}"
+                thumb="{{requestList[index+1].img.length==0? '../../icon/noPictures.png': requestList[index+1].img[0]}}"
+                price="{{requestList[index+1].price}}" other="华南理工大学 C10 606 ">
+            </i-card2>
+        </block>
+    </navigator>
+    <!-- 下面是列表 -->
+    <!-- <i-card1 title="推荐委托标题很长长长长长长长长长长长长长长长长长长长长长长长长长长" extra="委托内容也很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长" thumb="https://picsum.photos/350" price="10.00" other="华南理工大学 C10 606 ">
+    </i-card1> -->
+</block>
+
+<!-- 第二个tab页内容 -->
+<block wx:if="{{current == 1}}">敬请期待</block>
+
+<!-- 第三个tab页内容 -->
+<block wx:if="{{current == 2}}" wx:for="{{tradeList}}">
+    <navigator wx:if="{{viewType}}" url="../../components/tradeItem/tradeItem?id={{item._id}}">
+        <!-- wx:if="{{item.state==1 && item.publisher!=userinfo.openid}}"> -->
+        <i-card1 wx:if="{{item.state==1}}" title="{{item.title}}" extra="{{item.body}}"
+            thumb="{{item.img.length==0? '../../icon/noPictures.png': item.img[0]}}" price="{{item.price}}"
+            other="华南理工大学 C10 606 ">
+        </i-card1>
+    </navigator>
+    <navigator wx:if="{{!viewType}}" url="../../components/tradeItem/tradeItem?id={{item._id}}">
+        <block wx:if="{{index%2==0}}">
+            <i-card2 bindtap="handleJump" wx:if="{{item.state==1}}" title="{{item.title}}" extra="{{item.body}}"
+                thumb="{{item.img.length==0? '../../icon/noPictures.png': item.img[0]}}" price="{{item.price}}"
+                other="华南理工大学 C10 606 ">
+            </i-card2>
+            <i-card2 bindtap="handleJump" wx:if="{{requestList[index+1].state==1}}"
+                title="{{requestList[index+1].title}}" extra="{{item.body}}"
+                thumb="{{requestList[index+1].img.length==0? '../../icon/noPictures.png': requestList[index+1].img[0]}}"
+                price="{{requestList[index+1].price}}" other="华南理工大学 C10 606 ">
+            </i-card2>
+        </block>
+    </navigator>
+</block>
+
+
 <block>
   <!-- 第一种列表视图 -->
-  <i-card1 title="推荐委托标题很长长长长长长长长长长长长长长长长长长长长长长长长长长" extra="委托内容也很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长" thumb="https://picsum.photos/350" price="10.00" other="华南理工大学 C10 606 ">
+  <i-card1 title="推荐委托标题很长长长长长长长长长长长长长长长长长长长长长长长长长长"
+    extra="委托内容也很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长"
+    thumb="https://picsum.photos/350" price="10.00" other="华南理工大学 C10 606 ">
   </i-card1>
 
   <i-card1 title="推荐委托标题" extra="委托内容" thumb="https://picsum.photos/340" price="10.00" other="华工 C10 606 ">
@@ -60,7 +120,9 @@
   <!-- 第二种图片视图 -->
   <i-row>
     <i-col span="12" i-class="col-class">
-      <i-card2 title="推荐委托标题很长长长长长长长长长长长长长长长长长长长长长长长长长长" extra="委托内容也很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长" thumb="https://picsum.photos/360" price="10.00" other="华南理工大学 C10 606 ">
+      <i-card2 title="推荐委托标题很长长长长长长长长长长长长长长长长长长长长长长长长长长"
+        extra="委托内容也很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长"
+        thumb="https://picsum.photos/360" price="10.00" other="华南理工大学 C10 606 ">
       </i-card2>
     </i-col>
     <i-col span="12" i-class="col-class">

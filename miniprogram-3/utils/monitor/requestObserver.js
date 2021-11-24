@@ -12,7 +12,7 @@ class RequestObserver extends Observer{
     constructor(){
         super()
         this.message={
-            '-1':'接受人已完成您的委托，请尽快前往确认',
+            '-1':'您的委托已被完成，请尽快前往确认',
             '0':'您的委托已被接受',
             '1':'您的委托已被接收人放弃',
             '2':'委托人已确认，委托完成'

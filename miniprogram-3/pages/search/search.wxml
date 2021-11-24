@@ -5,7 +5,7 @@
 </view> -->
 
 <!-- TODO：连接组件的前后端 -->
-<van-search value="{{ inputValue }}" placeholder="请输入搜索关键词"  bind:search="onSearch" bindinput='getInput' bind:cancel="onCancel" bind:change="getInput" />
+<van-search value="{{ inputValue }}" placeholder="请输入搜索关键词"  bind:search="onSearch"  bind:cancel="onCancel" bind:change="getInput" />
 
 <!-- 筛选，目前是搜标题和搜内容 -->
 <!-- <view class="check">

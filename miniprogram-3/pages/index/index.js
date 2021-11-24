@@ -10,14 +10,63 @@ Page({
     RequestViewImg:['../../icon/view0.png','../../icon/view1.png'], //委托的视图的图标列表
     TradeViewImg:['../../icon/view0.png','../../icon/view2.png'], //交易的视图的图标列表
     viewType:true, //视图种类 true表示带图，false表示无图
-    requestList:[] //委托列表
+    requestList:[], //委托列表 TODO（肖梓洪）把推荐的委托放到这来 前端已经写好了
+    tradeList:[], //交易列表 TODO（肖梓洪）把推荐的交易放到这来
+    current:0, //标题栏
+    viewType:true, //视图种类 true表示带图，false表示无图
   },
+  //搜索栏跳转
   jump(){
    console.log(1)
     wx.navigateTo({
       url: '../search/search',
     })
   },
+  //tab切换
+  handleChange(e){
+    let that=this
+    let tab=e.detail.key
+    console.log(tab)
+    switch (tab){
+        case 'tab0':{
+            that.setData({
+                current:0
+            })
+            break
+        }
+        case 'tab1':{
+            that.setData({
+                current:1
+            })
+            break
+        }
+        case 'tab2':{
+            that.setData({
+                current:2
+            })
+            break
+        }
+    }
+    this.onLoad()
+  },
+   //切换视图
+   handleView(e){
+    console.log(e)
+    if(this.data.current==0){ //切换委托视图
+       let newImg= this.data.RequestViewImg.reverse()
+       this.setData({
+           RequestViewImg:newImg,
+           viewType:!this.data.viewType
+       })
+    }
+    else if(this.data.current==2){ //切换交易视图
+        let newImg= this.data.TradeViewImg.reverse()
+       this.setData({
+        TradeViewImg:newImg,
+        viewType:!this.data.viewType
+       })
+    }
+},
   /**
    * 生命周期函数--监听页面加载
    */

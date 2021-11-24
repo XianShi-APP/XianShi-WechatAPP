@@ -14,7 +14,33 @@ navigator{
     border: 1rpx solid black;
     background-color:ghostwhite;
 }
-checkbox{
+/* checkbox{
     width: 100%;
     border-radius: 50%;
+} */
+
+.overflow{
+ /*超出一行文字自动隐藏*/
+ overflow:hidden;
+ /*文字隐藏后添加省略号*/
+ text-overflow:ellipsis;
+ /*强制不换行*/
+ white-space:nowrap; 
+}
+.check1{
+
+} 
+.check2{
+    display: flex;
+    width: 650rpx;
+    
+} 
+
+checkbox {
+    
+    margin-left: 30rpx;
+
+}
+.emptyInfo{
+    margin-top: 300rpx;
 }
