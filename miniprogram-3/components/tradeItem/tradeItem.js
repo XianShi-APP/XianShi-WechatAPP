@@ -233,7 +233,7 @@ Page({
         let data={
             content: that.data.chat,
             trade_id: that.data.tradeItem._id,
-            trade_id:-1,
+            request_id:-1,
             sender:that.data.userInfo.nickName,
             avatarUrl:that.data.userInfo.avatarUrl,
             send_time: new Date().getTime()
@@ -315,11 +315,35 @@ Page({
         let res=tradeService.dbDocument('trade',options.id,'交易详情页获取成功')
         res.then(function(result){
             if(result!=false){
+                if(result.data.state==-1 || result.data=={}){
+                    wx.showToast({
+                      title: '此交易已完成或已被删除',
+                      icon:'none'
+                    })
+                    setTimeout(function(){
+                        wx.navigateBack({
+                            delta: 1,
+                          })
+                    },1000)
+                    return
+                }
                 that.setData({
                     tradeItem:result.data
                 })
                 that.getChat()
                 console.log(that.data.tradeItem)
+            }
+            else{
+                wx.showToast({
+                    title: '此交易已完成或已被删除',
+                    icon:'none'
+                  })
+                  setTimeout(function(){
+                    wx.navigateBack({
+                        delta: 1,
+                      })
+                },1000)
+                  return
             }
         })
         const userInfo=wx.getStorageSync('userinfo')

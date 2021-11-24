@@ -88,3 +88,7 @@ image{
   flex: 3;
   text-align: center;
 }
+.none{
+  justify-content: center;
+  text-align: center;
+}

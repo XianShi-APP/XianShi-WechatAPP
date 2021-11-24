@@ -395,7 +395,8 @@ Page({
 
      //删除委托
      delete(){
-         let that=this
+        const _ = wx.cloud.database().command
+        let that=this
         const item=this.data.item
         console.log('删除')
         if(item.receiver!=''){
@@ -420,6 +421,31 @@ Page({
                           },
                     })
                 }
+                //TODO 批量删除
+                // //删除相关消息
+                // wx.cloud.callFunction({
+                //     name: 'multiDelete',
+                //     data:{
+                //         database:'information',
+                //         where:{
+                //             request_id: _.eq(item._id)
+                //         }
+                //     }
+                // }).then(
+                //     console.log('删除消息成功')
+                // )
+                // //删除评论
+                // wx.cloud.callFunction({
+                //     name: 'multiDelete',
+                //     data:{
+                //         database:'chat',
+                //         where:{
+                //             request_id: _.eq(item._id)
+                //         }
+                //     }
+                // }).then(
+                //     console.log('删除评论成功')
+                // )
                 wx.showToast({
                   title: '删除成功',
                 })

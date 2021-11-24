@@ -1,63 +1,178 @@
 <!--pages/information/information.wxml-->
+
 <view class="button_wrap">
-    <button size="mini" wx:if="{{informationList.length>0}}" bindtap="handleCheck">{{buttonText[0]}}</button>
+    <button size="mini" wx:if="{{informationList.length>0 && !isHidden}}"
+        bindtap="handleCheck">{{buttonText[0]}}</button>
     <button size="mini" wx:if="{{!isHidden}}" type="primary" bindtap="handleDelete">确定</button>
 </view>
-<view wx:if="{{informationList.length==0}}">暂无消息</view>
+
+<!-- 无消息时 -->
+<view class="emptyInfo" wx:if="{{informationList.length==0}}">
+    <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无消息" />
+</view>
+
+
+
+
 <view wx:if="{{!isHidden}}">
-    <checkbox-group class="first_wrap" bindchange="handleChange">
-        <checkbox hidden="{{isHidden}}"  wx:for="{{informationList}}" wx-key="{{item._id}}"  value="{{item._id}}">
-        <navigator wx:if="{{item.type==1}}" url="{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=1'}}" class="first_information">
-            <view>
-                <view>{{item.content}}</view>
-                <view>委托名：{{item.title}} 接受人：{{item.receiver_name}}</view>
-            </view> 
-        </navigator>
-        <navigator wx:if="{{item.type==-1}}" url="{{'../../components/requestItem/requestItem?id='+item._id+'&who=0'}}" class="first_information">
-        <view>
-            <view>{{item.content}}</view>
-            <view>委托名：{{item.title}} 发布人：{{item.publisher_name}}</view>
-        </view>
-    </navigator>
-        <navigator wx:if="{{item.type==2}}" url="{{'../../components/tradeItem/tradeItem?id='+item.trade_id+'&who=1'}}" class="first_information">
-            <view>
-                <view>{{item.content}}</view>
-                <view>交易名：{{item.title}} 接受人：{{item.receiver_name}}</view>
-            </view> 
-        </navigator>
-        <navigator wx:if="{{item.type==-2}}" url="{{'../../components/tradeItem/tradeItem?id='+item._id+'&who=0'}}" class="first_information">
-            <view>
-                <view>{{item.content}}</view>
-                <view>交易名：{{item.title}} 发布人：{{item.publisher_name}}</view>
-            </view>
-        </navigator>
+    <checkbox-group bindchange="handleChange">
+        <checkbox class="check1" hidden="{{isHidden}}" wx:for="{{informationList}}" wx-key="{{item._id}}"
+            value="{{item._id}}">
+            <van-cell class="check2" wx:if="{{item.type==1}}" center link-type="navigateTo"
+                url="{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=1'}}">
+                <view slot="title">
+                    <i-card3 title="{{item.content}}">
+                        <view slot="content">
+                            <i-row>
+                                <i-col span="11" i-class="col-class">
+                                    <view class="overflow">
+                                        委托名：{{item.title}}
+                                    </view>
+                                </i-col>
+                                <i-col wx:if="{{item.type==1}}" span="11" offset="2" i-class="col-class">
+                                    接受人：{{item.receiver_name}}</i-col>
+
+                            </i-row>
+                        </view>
+                    </i-card3>
+                </view>
+            </van-cell>
+            <van-cell class="check2" wx:if="{{item.type==-1}}" center link-type="navigateTo"
+                url="{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=0'}}">
+                <view slot="title">
+                    <i-card3 title="{{item.content}}">
+                        <view slot="content">
+                            <i-row>
+                                <i-col span="11" i-class="col-class">
+                                    <view class="overflow">
+                                        委托名：{{item.title}}
+                                    </view>
+                                </i-col>
+                                <i-col span="11" offset="2" i-class="col-class">
+                                    发布人：{{item.publisher_name}}</i-col>
+
+                            </i-row>
+                        </view>
+                    </i-card3>
+                </view>
+            </van-cell>
+            <van-cell class="check2" wx:if="{{item.type==2}}" center link-type="navigateTo"
+                url="{{'../../components/tradeItem/tradeItem?id='+item.trade_id+'&who=1'}}">
+                <view slot="title">
+                    <i-card3 title="{{item.content}}">
+                        <view slot="content">
+                            <i-row>
+                                <i-col span="11" i-class="col-class">
+                                    <view class="overflow">
+                                        交易名：{{item.title}}
+                                    </view>
+                                </i-col>
+                                <i-col wx:if="{{item.type==1}}" span="11" offset="2" i-class="col-class">
+                                    购买人：{{item.receiver_name}}</i-col>
+
+                            </i-row>
+                        </view>
+                    </i-card3>
+                </view>
+            </van-cell>
+            <van-cell class="check2" wx:if="{{item.type==-2}}" center link-type="navigateTo"
+                url="{{'../../components/tradeItem/tradeItem?id='+item.trade_id+'&who=0'}}">
+                <view slot="title">
+                    <i-card3 title="{{item.content}}">
+                        <view slot="content">
+                            <i-row>
+                                <i-col span="11" i-class="col-class">
+                                    <view class="overflow">
+                                        交易名：{{item.title}}
+                                    </view>
+                                </i-col>
+                                <i-col span="11" offset="2" i-class="col-class">
+                                    出售人：{{item.publisher_name}}</i-col>
+
+                            </i-row>
+                        </view>
+                    </i-card3>
+                </view>
+            </van-cell>
         </checkbox>
-    </checkbox-group>        
+    </checkbox-group>
 </view>
 
 <view wx:if="{{isHidden}}" wx:for="{{informationList}}" wx:key="{{item._id}}">
-    <navigator bindlongpress="handleLongpress" wx:if="{{item.type==1}}" url="{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=1'}}" class="information">
-    <view>
-        <view>{{item.content}}</view>
-        <view>委托名：{{item.title}} 接受人：{{item.receiver_name}}</view>
-    </view> 
-    </navigator>
-    <navigator bindlongpress="handleLongpress" wx:if="{{item.type==-1}}" url=".{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=0'}}" class="information">
-    <view>
-        <view>{{item.content}}</view>
-        <view>委托名：{{item.title}} 发布人：{{item.publisher_name}}</view>
-    </view>
-    </navigator>
-    <navigator wx:if="{{item.type==2}}" url="{{'../../components/tradeItem/tradeItem?id='+item.trade_id+'&who=1'}}" class="first_information">
-            <view>
-                <view>{{item.content}}</view>
-                <view>交易名：{{item.title}} 接受人：{{item.receiver_name}}</view>
-            </view> 
-        </navigator>
-        <navigator wx:if="{{item.type==-2}}" url="{{'../../components/tradeItem/tradeItem?id='+item._id+'&who=0'}}" class="first_information">
-            <view>
-                <view>{{item.content}}</view>
-                <view>交易名：{{item.title}} 发布人：{{item.publisher_name}}</view>
-            </view>
-        </navigator>
+    <van-cell wx:if="{{item.type==1}}" center link-type="navigateTo" bindlongpress="handleLongpress"
+        url="{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=1'}}">
+        <view slot="title">
+            <i-card3 title="{{item.content}}">
+                <view slot="content">
+                    <i-row>
+                        <i-col span="11" i-class="col-class">
+                            <view class="overflow">
+                                委托名：{{item.title}}
+                            </view>
+                        </i-col>
+                        <i-col wx:if="{{item.type==1}}" span="11" offset="2" i-class="col-class">
+                            接受人：{{item.receiver_name}}</i-col>
+
+                    </i-row>
+                </view>
+            </i-card3>
+        </view>
+    </van-cell>
+    <van-cell wx:if="{{item.type==-1}}" center link-type="navigateTo" bindlongpress="handleLongpress"
+        url="{{'../../components/requestItem/requestItem?id='+item.request_id+'&who=0'}}">
+        <view slot="title">
+            <i-card3 title="{{item.content}}">
+                <view slot="content">
+                    <i-row>
+                        <i-col span="11" i-class="col-class">
+                            <view class="overflow">
+                                委托名：{{item.title}}
+                            </view>
+                        </i-col>
+                        <i-col span="11" offset="2" i-class="col-class">
+                            发布人：{{item.publisher_name}}</i-col>
+
+                    </i-row>
+                </view>
+            </i-card3>
+        </view>
+    </van-cell>
+    <van-cell wx:if="{{item.type==2}}" center link-type="navigateTo" bindlongpress="handleLongpress"
+        url="{{'../../components/tradeItem/tradeItem?id='+item.trade_id+'&who=1'}}">
+        <view slot="title">
+            <i-card3 title="{{item.content}}">
+                <view slot="content">
+                    <i-row>
+                        <i-col span="11" i-class="col-class">
+                            <view class="overflow">
+                                交易名：{{item.title}}
+                            </view>
+                        </i-col>
+                        <i-col span="11" offset="2" i-class="col-class">
+                            购买人：{{item.receiver_name}}</i-col>
+
+                    </i-row>
+                </view>
+            </i-card3>
+        </view>
+    </van-cell>
+    <van-cell wx:if="{{item.type==-2}}" center link-type="navigateTo" bindlongpress="handleLongpress"
+        url="{{'../../components/tradeItem/tradeItem?id='+item.trade_id+'&who=0'}}">
+        <view slot="title">
+            <i-card3 title="{{item.content}}">
+                <view slot="content">
+                    <i-row>
+                        <i-col span="11" i-class="col-class">
+                            <view class="overflow">
+                                交易名：{{item.title}}
+                            </view>
+                        </i-col>
+                        <i-col span="11" offset="2" i-class="col-class">
+                            出售人：{{item.publisher_name}}</i-col>
+
+                    </i-row>
+                </view>
+            </i-card3>
+        </view>
+    </van-cell>
 </view>

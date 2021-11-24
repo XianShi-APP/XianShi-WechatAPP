@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "van-panel": "../../distVant/panel/index",
+    "van-divider": "../../distVant/divider/index"
+  },
   "navigationBarTitleText": "委托"
 }

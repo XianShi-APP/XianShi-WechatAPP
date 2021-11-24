@@ -29,6 +29,24 @@
                     "pathName": "components/requestItem/requestItem",
                     "query": "id=9e7190f1617e3e8e02ef102d111d5003",
                     "scene": null
+                },
+                {
+                    "name": "pages/taskInfo",
+                    "pathName": "pages/taskInfo/taskInfo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "components/requestItem/requestItem",
+                    "pathName": "components/requestItem/requestItem",
+                    "query": "id=1",
+                    "scene": null
+                },
+                {
+                    "name": "components/requestItem/requestItem",
+                    "pathName": "components/requestItem/requestItem",
+                    "query": "id=fa24ce1a619dfd3308bb59a63d20be83",
+                    "scene": null
                 }
             ]
         }

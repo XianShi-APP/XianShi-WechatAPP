@@ -16,12 +16,12 @@
     <input wx:if="{{options==0}}" class="price" type="digit" step="0.01" placeholder="请输入价格" bindinput="getPrice" value="{{price}}"> </input>
     <!-- <input type="text" placeholder="请选择委托时限"> </input> -->
 </view>
-<button wx:if="{{options==0}}" type="primary" bindtap="handlePublish">确认发布</button>
-<button wx:if="{{options==1 && receiver==''}}" type="primary" bindtap="handleChange">修改委托</button>
-<button wx:if="{{options==1 && receiver==''}}" type="warn" bindtap="handleDelete">取消委托</button>
+<button class="button" wx:if="{{options==0}}" type="primary" bindtap="handlePublish">确认发布</button>
+<button class="button" wx:if="{{options==1 && receiver==''}}" type="primary" bindtap="handleChange">修改委托</button>
+<button class="button" wx:if="{{options==1 && receiver==''}}" type="warn" bindtap="handleDelete">取消委托</button>
 <view wx:if="{{options==1 && receiver!=''}}">
    
-    <button type="primary" bindtap="handleConfirm">确认完成</button>
+    <button class="button" type="primary" bindtap="handleConfirm">确认完成</button>
 </view>
 
 

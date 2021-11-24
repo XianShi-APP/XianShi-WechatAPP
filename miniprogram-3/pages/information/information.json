@@ -1,5 +1,12 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-card3": "../../dist/card3/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "van-cell": "../../distVant/cell/index",
+    "van-cell-group": "../../distVant/cell-group/index",
+    "van-empty": "../../distVant/empty/index"
+  },
   "navigationBarTitleText":"消息中心",
   "enablePullDownRefresh": true
 }
